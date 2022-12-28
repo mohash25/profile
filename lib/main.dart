@@ -10,6 +10,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    Color surfaceColor = const Color(0x0dffffff);
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
@@ -37,7 +38,7 @@ class MyApp extends StatelessWidget {
         ),
         primarySwatch: Colors.blue,
         primaryColor: Colors.pinkAccent,
-        dividerTheme: DividerThemeData(thickness: 0.75,indent: 32,endIndent: 32)
+        dividerTheme: DividerThemeData(thickness: 0.75,indent: 32,endIndent: 32,color: surfaceColor)
       ),
       home: MyHomePage(),
     );
@@ -59,6 +60,7 @@ class MyHomePage extends StatelessWidget {
           ],
         ),
         body: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
               padding: const EdgeInsets.all(32),
@@ -100,7 +102,39 @@ class MyHomePage extends StatelessWidget {
               padding: const EdgeInsets.fromLTRB(32, 0, 32, 16),
               child:  Text("Lorem ipsum dolor sit amet, aliquid liberavisse per at, qui ad amet facete. Per alterum adipisci ea. Equidem pericula ex eos, nullam nusquam erroribus eam an, paulo homero reprehendunt ne nec Lobortis.", style: Theme.of(context).textTheme.bodyText1,),
             ),
-            Divider()
+            Divider(),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(32, 16, 32, 12),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Text("Skills",style: Theme.of(context).textTheme.bodyText2!.copyWith(fontWeight: FontWeight.w900),),
+                  SizedBox(width: 2,),
+                  Icon(CupertinoIcons.chevron_down,size: 12,)
+                ],
+              ),
+            ),
+            Center(
+              child: Wrap(
+                direction: Axis.horizontal,
+                spacing: 8,
+                runSpacing: 8,
+                children: [
+                  Container(
+                    decoration: BoxDecoration(color: Theme.of(context).dividerTheme.color,borderRadius: BorderRadius.circular(16)),
+                    width: 110,
+                    height: 110,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.asset("assets/images/Adobe_Photoshop.png",width: 40,height: 40,),
+                        Text("Photoshop")
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            )
           ],
         ));
   }
