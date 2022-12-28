@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 void main() {
   runApp(const MyApp());
 }
@@ -23,7 +22,22 @@ class MyApp extends StatelessWidget {
         // or simply save your changes to "hot reload" in a Flutter IDE).
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
+        brightness: Brightness.dark,
+        scaffoldBackgroundColor: Color.fromARGB(255, 30, 30, 30),
+        appBarTheme: AppBarTheme(
+          backgroundColor: Colors.black
+        ),
+        fontFamily: 'Lato',
+        textTheme: TextTheme(
+          bodyText2: TextStyle(fontSize: 15),
+          bodyText1: TextStyle(fontSize: 13, color: Color.fromARGB(200, 255, 255, 255)),
+          headline6: TextStyle(fontWeight: FontWeight.bold),
+          subtitle1: TextStyle(fontSize: 16,fontWeight: FontWeight.bold)
+
+        ),
         primarySwatch: Colors.blue,
+        primaryColor: Colors.pinkAccent,
+        dividerTheme: DividerThemeData(thickness: 0.75,indent: 32,endIndent: 32)
       ),
       home: MyHomePage(),
     );
@@ -57,29 +71,36 @@ class MyHomePage extends StatelessWidget {
                         width: 60,
                         height: 60,
                       )),
-                  const SizedBox(width: 16,),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('Masoud Shahbazi'),
-                      const SizedBox(height: 2,),
-                      Text('Full Stack Web & Mobile app Developer '),
-                      const SizedBox(height: 4,),
-                      Row(
+                  SizedBox(width: 16,),
+                  Expanded(
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Icon(CupertinoIcons.placemark),
-                          Text('Tehran, Iran')
+                          Text('Masoud Shahbazi',style: Theme.of(context).textTheme.subtitle1,),
+                          const SizedBox(height: 2,),
+                          Text('Full Stack Web Developer '),
+                          const SizedBox(height: 8,),
+                          Row(
+                            children: [
+                              Icon(CupertinoIcons.placemark,color: Theme.of(context).textTheme.bodyText1!.color,size: 14,),
+                              SizedBox(width: 3,),
+                              Text('Tehran, Iran',style: Theme.of(context).textTheme.caption,)
+                            ],
+                          )
                         ],
-                      )
-                    ],
-                  )
+                      ),
+                  ),
+                  Icon(CupertinoIcons.heart,color: Theme.of(context).primaryColor,),
+
+
                 ],
               ),
             ),
             Padding(
               padding: const EdgeInsets.fromLTRB(32, 0, 32, 16),
-              child: const Text('Lorem ipsum dolor sit amet, aliquid liberavisse per at, qui ad amet facete. Per alterum adipisci ea. Equidem pericula ex eos, nullam nusquam erroribus eam an, paulo homero reprehendunt ne nec Lobortis.'),
-            )
+              child:  Text("Lorem ipsum dolor sit amet, aliquid liberavisse per at, qui ad amet facete. Per alterum adipisci ea. Equidem pericula ex eos, nullam nusquam erroribus eam an, paulo homero reprehendunt ne nec Lobortis.", style: Theme.of(context).textTheme.bodyText1,),
+            ),
+            Divider()
           ],
         ));
   }
