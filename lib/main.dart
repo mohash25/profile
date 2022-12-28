@@ -45,7 +45,22 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatelessWidget {
+class MyHomePage extends StatefulWidget {
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+enum SkillType{
+  photoshop,xd,illustrator,afterEffect,lightRoom,
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  SkillType _skill = SkillType.photoshop;
+  void updateSelectedSkill(SkillType skillType){
+    setState(() {
+      this._skill = skillType;
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -114,28 +129,95 @@ class MyHomePage extends StatelessWidget {
                 ],
               ),
             ),
+            SizedBox(height: 12,),
             Center(
               child: Wrap(
                 direction: Axis.horizontal,
                 spacing: 8,
                 runSpacing: 8,
                 children: [
-                  Container(
-                    decoration: BoxDecoration(color: Theme.of(context).dividerTheme.color,borderRadius: BorderRadius.circular(16)),
-                    width: 110,
-                    height: 110,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image.asset("assets/images/Adobe_Photoshop.png",width: 40,height: 40,),
-                        Text("Photoshop")
-                      ],
-                    ),
-                  ),
+                  Skill(title: "Photoshop",
+                      type: SkillType.photoshop,
+                      isActivated: _skill==SkillType.photoshop,
+                      imagePath: "assets/images/app_icon_01.png",
+                      shadowColor: Colors.blueAccent,
+                      onTap: (){
+                        updateSelectedSkill(SkillType.photoshop);
+                      }),
+                  Skill(title: "Adobe XD",
+                      type: SkillType.xd,
+                      isActivated: _skill==SkillType.xd,
+                      imagePath: "assets/images/app_icon_02.png",
+                      shadowColor: Colors.pinkAccent,
+                      onTap: (){
+                        updateSelectedSkill(SkillType.xd);
+                      }),
+                  Skill(title: "Illustrator",
+                      type: SkillType.illustrator,
+                      isActivated: _skill==SkillType.illustrator,
+                      imagePath: "assets/images/app_icon_03.png",
+                      shadowColor: Colors.orangeAccent,
+                      onTap: (){
+                        updateSelectedSkill(SkillType.illustrator);
+                      }),
+                  Skill(title: "After Effect",
+                      type: SkillType.afterEffect,
+                      isActivated: _skill==SkillType.afterEffect,
+                      imagePath: "assets/images/app_icon_04.png",
+                      shadowColor: Colors.blue.shade800,
+                      onTap: (){
+                        updateSelectedSkill(SkillType.afterEffect);
+                      }),
+                  Skill(title: "Lightroom",
+                      type: SkillType.lightRoom,
+                      isActivated: _skill==SkillType.lightRoom,
+                      imagePath: "assets/images/app_icon_05.png",
+                      shadowColor: Colors.blueAccent,
+                      onTap: (){
+                        updateSelectedSkill(SkillType.lightRoom);
+                      }),
                 ],
               ),
             )
           ],
         ));
+  }
+}
+
+class Skill extends StatelessWidget {
+  final SkillType type;
+  final String title;
+  final String imagePath;
+  final Color shadowColor;
+  final bool isActivated;
+  final Function() onTap;
+  const Skill({
+    Key? key, required this.title, required this.imagePath, required this.shadowColor, required this.isActivated, required this.type, required this.onTap,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final BorderRadius defaultBorderRadius= BorderRadius.circular(12);
+
+    return InkWell(
+      borderRadius: defaultBorderRadius,
+      onTap: onTap,
+      child: Container(
+        decoration: isActivated?BoxDecoration(color: Theme.of(context).dividerTheme.color,borderRadius: defaultBorderRadius):null,
+        width: 110,
+        height: 110,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(imagePath,
+              width: 40,
+              height: 40
+            ),
+            SizedBox(height: 8,),
+            Text(title)
+          ],
+        ),
+      ),
+    );
   }
 }
