@@ -1,6 +1,6 @@
 # profile
 
-A simple profile UI.
+A simple profile with Flutter.
 
 ## Getting Started
 
